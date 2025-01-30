@@ -26,7 +26,7 @@ const menuItems = [
 
 export const Header = () => {
   return (
-    <div className='flex h-auto items-center gap-[120px] border-b border-border px-[16px] py-[20px] md:h-[70px] md:pl-[60px]'>
+    <div className='flex h-[70px] items-center gap-[120px] border-b border-border py-[20px] pl-[60px] md:h-auto md:px-[16px]'>
       <div className='text-white'>Flipfox logo</div>
       <ul className='flex items-center gap-11 lg:hidden'>
         {menuItems.map(({ text, url }) => (

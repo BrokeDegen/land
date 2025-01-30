@@ -5,7 +5,6 @@ import { Footer } from '@/widgets/Footer';
 import classNames from 'classnames';
 import { BASE_DOMAIN, isDev } from '@/shared/constants/global';
 import Script from 'next/script';
-import { Providers } from './providers';
 import { leagueSpartan } from '@/shared/fonts/fonts';
 
 export const metadata: Metadata = {
@@ -50,13 +49,11 @@ export default function RootLayout({
         gtag('config', 'G-P1123123123');
         `}
       </Script>
-      <Providers>
-        <body className={classNames(leagueSpartan.className, 'bg-black')}>
-          <Header />
-          {children}
-          <Footer />
-        </body>
-      </Providers>
+      <body className={classNames(leagueSpartan.className, 'bg-black')}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -21,7 +21,10 @@ export const Button = ({
       onClick={onClick}
       className={classNames(
         'rounded-[16px] border-[5px] border-solid border-[#FFDB7929] bg-[linear-gradient(0deg,_#FFFFFF,_#FFFFFF),_linear-gradient(90deg,_#FFAF56_0%,_#FFFD82_100%)] text-black',
+        className,
       )}
-    ></button>
+    >
+      {children}
+    </button>
   );
 };
