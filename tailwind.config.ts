@@ -9,6 +9,7 @@ export default {
         red: 'var(--red)',
         card: 'var(--card)',
         border: 'var(--border)',
+        textSecondary: 'var(--text-secondary)',
       },
     },
     screens: {
