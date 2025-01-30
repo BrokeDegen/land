@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+}
+
+:root {
+  --black: #10141c;
+  --red: #e24a51;
+  --card: #171b23;
+  --border: #262f40;
+}
+
+html {
+  scroll-behavior: smooth;
+  color: #fff;
+}
