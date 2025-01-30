@@ -1,4 +1,4 @@
-import mixpanel from "mixpanel-browser";
+import mixpanel from 'mixpanel-browser';
 
 export const init = (token: string, options: any) => {
   mixpanel.init(token, options);
@@ -9,7 +9,7 @@ export const identify = (address: string) => {
 };
 
 export const pageLoad = (values: Record<string, string>) => {
-  mixpanel.track("page_load", values);
+  mixpanel.track('page_load', values);
 };
 
 export const reset = () => {

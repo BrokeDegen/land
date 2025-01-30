@@ -1,12 +1,12 @@
-import React from "react";
-import Twitter from "./Twitter.svg";
-import Discord from "./Discord.svg";
-import Telegram from "./Telegram.svg";
+import React from 'react';
+import Twitter from './Twitter.svg';
+import Discord from './Discord.svg';
+import Telegram from './Telegram.svg';
 
 export enum IconNames {
-  twitter = "twitter",
-  discord = "discord",
-  telegram = "telegram",
+  twitter = 'twitter',
+  discord = 'discord',
+  telegram = 'telegram',
 }
 
 type IconProps = {

@@ -1,15 +1,15 @@
-import type { RefObject } from "react";
+import type { RefObject } from 'react';
 
-import { useEventListener } from "./useEventListener";
+import { useEventListener } from './useEventListener';
 
 /** Supported event types. */
 type EventType =
-  | "mousedown"
-  | "mouseup"
-  | "touchstart"
-  | "touchend"
-  | "focusin"
-  | "focusout";
+  | 'mousedown'
+  | 'mouseup'
+  | 'touchstart'
+  | 'touchend'
+  | 'focusin'
+  | 'focusout';
 
 /**
  * Custom hook that handles clicks outside a specified element.
@@ -32,8 +32,8 @@ type EventType =
 export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   ref: RefObject<T> | RefObject<T>[],
   handler: (event: MouseEvent | TouchEvent | FocusEvent) => void,
-  eventType: EventType = "mousedown",
-  eventListenerOptions: AddEventListenerOptions = {}
+  eventType: EventType = 'mousedown',
+  eventListenerOptions: AddEventListenerOptions = {},
 ): void {
   useEventListener(
     eventType,
@@ -56,6 +56,6 @@ export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
       }
     },
     undefined,
-    eventListenerOptions
+    eventListenerOptions,
   );
 }

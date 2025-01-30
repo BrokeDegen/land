@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: 'export',
   images: { unoptimized: true },
   typescript: {
     ignoreBuildErrors: true,
@@ -9,16 +9,16 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  distDir: process.env.NODE_ENV === "development" ? undefined : "dist",
+  distDir: process.env.NODE_ENV === 'development' ? undefined : 'dist',
   webpack: (config, { dev }) => {
     if (config.cache && !dev) {
       config.cache = Object.freeze({
-        type: "memory",
+        type: 'memory',
       });
     }
-    config.externals.push("pino-pretty", "lokijs", "encoding");
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     const fileLoaderRule = config.module.rules.find((rule: any) =>
-      rule.test?.test?.(".svg")
+      rule.test?.test?.('.svg'),
     );
 
     config.module.rules.push(
@@ -34,12 +34,12 @@ const nextConfig: NextConfig = {
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         use: {
-          loader: "@svgr/webpack",
+          loader: '@svgr/webpack',
           options: {
             icon: true,
           },
         },
-      }
+      },
     );
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
