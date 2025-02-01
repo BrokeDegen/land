@@ -1,0 +1,18 @@
+.bannerText {
+  font-family: 'Unbounded', sans-serif; /* Применяем шрифт Unbounded и запасной sans-serif */
+  font-size: 260px; /* Размер шрифта */
+  font-weight: bold; /* Жирное начертание */
+  line-height: 245px; /* Межстрочный интервал */
+  background: linear-gradient(180deg, #DEE4F1 0%, #80848B 100%); /* Линейный градиент */
+  -webkit-background-clip: text;
+  color: transparent; /* Делаем текст прозрачным для отображения градиента */
+}
+
+.foxText {
+  background: linear-gradient(90deg, #CBDC9B 3.05%, rgba(203, 124, 62, 0.693284) 25.45%, rgba(177, 125, 85, 0.4) 46.2%, #DC9B9B 81.02%);
+  -webkit-background-clip: text;
+}
+
+.block {
+  background-color: rgba(255, 255, 255, 0.169);
+}
