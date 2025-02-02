@@ -19,6 +19,12 @@
   -webkit-background-clip: text;
 }
 
+@media (max-width: 1300px) {
+  .section {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 767px) {
   .bannerText {
     font-size: 116px;
