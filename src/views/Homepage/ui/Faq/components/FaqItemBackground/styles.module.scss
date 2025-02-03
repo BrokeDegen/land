@@ -1,0 +1,17 @@
+.background {
+  z-index: 0;
+  position: absolute;
+  width: 1312.71px;
+  height: 599.3px;
+  top: -36.75px;
+  opacity: 0;
+  left: -371.05px;
+  filter: blur(85px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../../assets/faq-gradient.svg');
+}
+
+.active {
+  opacity: 1;
+}
