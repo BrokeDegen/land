@@ -1,5 +1,5 @@
-import feature5 from './assets/feature-5.png';
-import chart from './assets/chart.png';
+import feature5 from './assets/feature-5.svg?url';
+import chart from './assets/chart.svg?url';
 import floxLogo from './assets/flox-logo.png';
 import plusAction from './assets/plus-action.png';
 import Image from 'next/image';
@@ -8,14 +8,15 @@ import { kumbhSans, poppins } from '@/shared/fonts/fonts';
 
 interface FloatBlock {
   className: string;
+  secondBlockClassName?: string;
   isActive: boolean;
 }
   
-const FloatBlock = ({ className, isActive, children }: React.PropsWithChildren<FloatBlock>) => {
+const FloatBlock = ({ className, isActive, secondBlockClassName = '', children }: React.PropsWithChildren<FloatBlock>) => {
   return (
     <div className={`absolute w-[210px] h-[180px] rounded-[24px] p-[1px] overflow-hidden opacity-${isActive ? '100' : '0'} transition-opacity lg:w-[110px] lg:h-[94px] lg:rounded-[12px] ${className}`}>
       <div className={`absolute inset-0 z-0 rounded-[24px] bg-gradient-to-b from-[rgba(255,_200,_133,_0.1)] via-transparent to-transparent transition-opacity duration-300 ease-in-out opacity-100 lg:rounded-[12px]`} />
-      <div className={`relative z-10 flex h-[180px] cursor-pointer flex-col overflow-hidden rounded-[24px] transition-all duration-300 ease-in-out bg-[rgba(255,_200,_133,_0.1)] backdrop-blur-[31.8px] lg:rounded-[12px] lg:h-[94px]`} />
+      <div className={`relative z-10 flex h-[180px] cursor-pointer flex-col overflow-hidden rounded-[24px] transition-all duration-300 ease-in-out bg-[rgba(255,_200,_133,_0.1)] backdrop-blur-[31.8px] lg:rounded-[12px] lg:h-[94px] ${secondBlockClassName}`} />
       {children}
     </div>
   );
@@ -73,8 +74,8 @@ const FloatBlocks = ({ activeIndex }: FloatBlocksProps) => {
         </div>
       </FloatBlock>
 
-      <FloatBlock className='top-[35px] left-[291px] h-[200px] lg:left-[140px] lg:top-[0px] lg:h-[120px]' isActive={activeIndex === 4}>
-        <Image src={feature5} alt="" className="absolute w-[210px] top-[0] z-10 lg:w-[108px]" />
+      <FloatBlock className='top-[35px] left-[291px] h-[200px] lg:left-[140px] lg:top-[0px]' isActive={activeIndex === 4} secondBlockClassName='h-[220px]'>
+        <Image src={feature5} alt="" className="absolute w-[210px] top-[0] z-10 lg:w-[104px] lg:left-[2px]" />
       </FloatBlock>
     </>
   );
