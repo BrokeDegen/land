@@ -3,6 +3,8 @@ import chart from './assets/chart.png';
 import floxLogo from './assets/flox-logo.png';
 import plusAction from './assets/plus-action.png';
 import Image from 'next/image';
+import classNames from 'classnames';
+import { kumbhSans, poppins } from '@/shared/fonts/fonts';
 
 interface FloatBlock {
   className: string;
@@ -28,8 +30,8 @@ const FloatBlocks = ({ activeIndex }: FloatBlocksProps) => {
     <>
       <FloatBlock className='top-[260px] left-[291px] lg:left-[140px] lg:top-[150px]' isActive={activeIndex === 0}>
         <div className="absolute top-[26px] left-[26px] z-10 flex flex-col gap-[16px] lg:top-[12px] lg:left-[16px] lg:gap-[6px]">
-          <span className="font-[poppins] text-[15px] leading-[12px] lg:text-[8px]">Starting price</span>
-          <span className="font-[poppins] text-[27px] font-semibold leading-[12px] lg:text-[16px]">$0,0358</span>
+          <span className={classNames(poppins.className, 'text-[15px] leading-[12px] lg:text-[8px]')}>Starting price</span>
+          <span className={classNames(poppins.className, 'text-[27px] font-semibold leading-[12px] lg:text-[16px]')}>$0,0358</span>
         </div>
         <Image src={chart} alt="" className="absolute bottom-[0] right-[0] z-10 lg:w-[90px]" />
       </FloatBlock>
@@ -57,21 +59,21 @@ const FloatBlocks = ({ activeIndex }: FloatBlocksProps) => {
       </FloatBlock>
 
       <FloatBlock className='top-[53px] left-[291px] lg:left-[140px] lg:top-[0px]' isActive={activeIndex === 2}>
-        <div className="absolute top-[0] left-[0] w-full h-full flex flex-col items-center justify-center z-10 gap-[10px] lg:gap-[6px]">
-          <span className="font-[kumbhSans] text-[16px] lg:text-[8px]">Point reward:</span>
+        <div className="absolute top-[0] left-[0] w-full h-full flex flex-col items-center justify-center z-10 gap-[10px] lg:gap-[6px] lg:pt-[2px]">
+          <span className={classNames(kumbhSans.className, 'text-[16px] lg:text-[9px]')}>Point reward:</span>
           <Image src={floxLogo} alt="fox image" className="w-[44px] lg:w-[25px]" />
-          <span className="font-[kumbhSans] text-[27px] font-bold text-[#FDA883] lg:text-[14px]">50.2 FLOX</span>
+          <span className={classNames(kumbhSans.className, 'text-[27px] font-bold text-[#FDA883] lg:text-[14px]')}>50.2 FLOX</span>
         </div>
       </FloatBlock>
 
       <FloatBlock className='top-[312px] left-[-82px] lg:left-[-25px] lg:top-[162px]' isActive={activeIndex === 3}>
-        <div className="absolute top-[0] left-[0] w-full h-full flex flex-col items-center justify-center z-10 gap-[25px] lg:gap-[8px]">
+        <div className="absolute top-[0] left-[0] w-full h-full flex flex-col items-center justify-center z-10 gap-[25px] lg:gap-[8px] lg:pt-[6px]">
           <Image src={plusAction} alt="plus images" className="w-[74px] h-[74px] lg:w-[40px] lg:h-[40px]" />
-          <span className="text-[27px] leading-[23px] lg:text-[14px]">New Event</span>
+          <span className="text-[27px] leading-[23px] lg:text-[14px] font-medium">New Event</span>
         </div>
       </FloatBlock>
 
-      <FloatBlock className='top-[35px] left-[291px] h-[200px] lg:left-[140px] lg:top-[0px] lg:h-[110px]' isActive={activeIndex === 4}>
+      <FloatBlock className='top-[35px] left-[291px] h-[200px] lg:left-[140px] lg:top-[0px] lg:h-[120px]' isActive={activeIndex === 4}>
         <Image src={feature5} alt="" className="absolute w-[210px] top-[0] z-10 lg:w-[108px]" />
       </FloatBlock>
     </>

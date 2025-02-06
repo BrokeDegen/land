@@ -11,10 +11,6 @@ export default {
         border: 'var(--border)',
         textSecondary: 'var(--text-secondary)',
       },
-      fontFamily: {
-        kumbhSans: 'var(--font-kumbh-sans)',
-        poppins: 'var(--font-poppins)',
-      }
     },
     screens: {
       xl: { max: '1024px' },

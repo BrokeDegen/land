@@ -75,8 +75,8 @@ const Features = ({ activeIndex }: FeaturesProps) => {
         </div>
       </div>
 
-      <div className="absolute w-full h-[194px] top-[0] bg-[linear-gradient(360deg,_rgba(16,_20,_28,_0)_0%,_#10141C_60%)]" />
-      <div className="absolute w-full bottom-[0] top-[652px] bg-[linear-gradient(360deg,_#10141C_0%,_rgba(16,_20,_28,_0)_100%)]" />
+      <div className="absolute w-full h-[24.93vh] top-[0] bg-[linear-gradient(360deg,_rgba(16,_20,_28,_0)_0%,_#10141C_60%)]" />
+      <div className="absolute w-full bottom-[0] top-[83.80vh] bg-[linear-gradient(360deg,_#10141C_0%,_rgba(16,_20,_28,_0)_100%)]" />
     </>
   );
 };
