@@ -27,7 +27,7 @@ export const BenefitsSection: FC = () => {
   return (
     <div
       className={classNames(
-        'mt-[36px] flex w-full justify-between',
+        'mt-[36px] flex w-full justify-between md:mt-[200px]',
         styles.section,
       )}
     >
@@ -50,10 +50,14 @@ const BenefitCard = ({ benefit }: { benefit: BenefitType }) => {
   return (
     <div
       key={benefit.id}
-      className='outline-solid flex w-[228px] flex-col items-center gap-[58px] outline outline-red'
+      className='flex w-[228px] flex-col items-center gap-[58px] md:w-[179px]'
     >
-      <Image src={benefit.icon} alt={`benefit ${benefit.id}`} />
-      <p className='text-center text-[27px] font-normal leading-[25px]'>
+      <Image
+        src={benefit.icon}
+        alt={`benefit ${benefit.id}`}
+        className='md:w-[82px]'
+      />
+      <p className='text-center text-[27px] font-normal leading-[25px] md:text-[20px] md:leading-[18.5px]'>
         {benefit.text}
       </p>
     </div>
