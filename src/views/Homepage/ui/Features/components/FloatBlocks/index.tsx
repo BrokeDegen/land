@@ -71,7 +71,7 @@ const FloatBlocks = ({ activeIndex }: FloatBlocksProps) => {
         </div>
       </FloatBlock>
 
-      <FloatBlock className='top-[35px] left-[291px] h-[200px] lg:left-[140px] lg:top-[0px] lg:h-[100px]' isActive={activeIndex === 4}>
+      <FloatBlock className='top-[35px] left-[291px] h-[200px] lg:left-[140px] lg:top-[0px] lg:h-[110px]' isActive={activeIndex === 4}>
         <Image src={feature5} alt="" className="absolute w-[210px] top-[0] z-10 lg:w-[108px]" />
       </FloatBlock>
     </>

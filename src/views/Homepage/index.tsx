@@ -27,7 +27,6 @@ export const Homepage = () => {
           thresholdDelta: 10,
         }}
         modules={[Mousewheel]}
-        className='mySwiper'
         onSwiper={setMainSwiper}
       >
         <SwiperSlide>
@@ -36,7 +35,7 @@ export const Homepage = () => {
         <SwiperSlide>
           <Features activeIndex={insideSwiperActiveIndex} />
           <Swiper
-            className='mySwiper2 swiper-h'
+            className='swiper-h'
             spaceBetween={0}
             modules={[Mousewheel]}
             onSwiper={setInsideSwiper}
