@@ -19,7 +19,7 @@ export const Homepage = () => {
     <>
       <Swiper
         direction='vertical'
-        slidesPerView={1}
+        slidesPerView={'auto'}
         spaceBetween={0}
         mousewheel={{
           enabled: true,
@@ -33,9 +33,12 @@ export const Homepage = () => {
           <Purchase />
         </SwiperSlide>
         <SwiperSlide>
+          <Media />
+        </SwiperSlide>
+        <SwiperSlide className='swiper-slide-with-swiper'>
           <Features activeIndex={insideSwiperActiveIndex} />
           <Swiper
-            className='swiper-h'
+            className='inside-swiper swiper-h'
             spaceBetween={0}
             modules={[Mousewheel]}
             onSwiper={setInsideSwiper}
@@ -43,6 +46,7 @@ export const Homepage = () => {
               enabled: false,
               thresholdTime: 1000,
               thresholdDelta: 10,
+              releaseOnEdges: true,
             }}
           >
             <SwiperSlide />
@@ -51,9 +55,6 @@ export const Homepage = () => {
             <SwiperSlide />
             <SwiperSlide />
           </Swiper>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Media />
         </SwiperSlide>
       </Swiper>
 

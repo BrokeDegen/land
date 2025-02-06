@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { SwiperClass } from 'swiper/react';
 
 const INSIDE_SLIDES_LENGTH = 5;
-const INSIDE_SILDER_POSITION = 1;
+const INSIDE_SILDER_POSITION = 2;
 const MAIN_SLIDER_START_INDEX = 0;
 const INSIDE_SLIDER_START_INDEX = 0;
 const INSIDE_SLIDER_END_INDEX = INSIDE_SLIDES_LENGTH - 1;
