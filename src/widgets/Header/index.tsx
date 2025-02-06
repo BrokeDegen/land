@@ -28,7 +28,7 @@ const menuItems = [
 
 export const Header = () => {
   return (
-    <div className='flex h-[70px] items-center gap-[120px] border-b border-border py-[20px] pl-[60px] lg:border-none lg:pr-[60px] md:h-auto md:px-[16px]'>
+    <div className='fixed w-full z-10 bg-black flex h-[70px] items-center gap-[120px] border-b border-border py-[20px] pl-[60px] lg:border-none lg:pr-[60px] md:h-auto md:px-[16px]'>
       <Image src={Logo} alt='logo' />
       <ul className='flex items-center gap-11 lg:hidden'>
         {menuItems.map(({ text, url }) => (

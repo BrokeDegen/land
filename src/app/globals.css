@@ -17,3 +17,8 @@ html {
   scroll-behavior: smooth;
   color: #fff;
 }
+
+html,
+body {
+  height: 100%;
+}

@@ -1,0 +1,15 @@
+@media (max-width: 991px) {
+  .left {
+    transform: none !important;
+  }
+
+  .featureTexts {
+    margin-top: 0 !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .textsWrapper {
+    transform: none !important;
+  }
+}

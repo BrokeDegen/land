@@ -12,7 +12,7 @@ import XIcon from '@/shared/icons/Twitter.svg?url';
 const Purchase = () => {
   return (
     <div
-      className={`outline-solid mx-auto flex w-[-webkit-fill-available] max-w-[1440px] outline outline-1 outline-[#202736] ${styles.section}`}
+      className={`pt-[70px] outline-solid mx-auto flex w-[-webkit-fill-available] max-w-[1440px] outline outline-1 outline-[#202736] ${styles.section}`}
     >
       <div className='outline-solid relative flex-1 outline-1 outline-[#202736]'>
         <div className='md:mt-[50px]'>
