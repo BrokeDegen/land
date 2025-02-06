@@ -33,7 +33,7 @@ const Features = ({ activeIndex }: FeaturesProps) => {
 
           <div
             className={`${styles.textsWrapper} lg:inline-flex lg:left-[50%] lg:relative lg:translate-x-[-${mobileTextWidth / 2}px] transition-transform lg:gap-[${mobileTextGap}px]`}
-            style={{ transform: `translateX(-${activeIndex * mobileTextWidth + mobileTextWidth / 2 + activeIndex * mobileTextGap}px)`}}
+            style={{ transform: `translateX(-${activeIndex * mobileTextWidth + mobileTextWidth / 2}px)`}}
           >
             {features.map((f, i) => {
               const isActive = i === activeIndex;
