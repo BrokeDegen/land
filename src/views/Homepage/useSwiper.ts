@@ -51,6 +51,12 @@ export const useSwiper = () => {
       setInsideSwiperActiveIndex(swiper.activeIndex);
     });
 
+    insideSwiper.on('beforeTransitionStart', (swiper) => {
+      window.scrollTo({
+        top: swiper.el.offsetTop,
+      })
+    })
+
     insideSwiper.on('slideChangeTransitionEnd', (swiper) => {
       if (swiper.activeIndex === INSIDE_SLIDER_START_INDEX) {
         mainSwiper.allowSlideNext = false;
@@ -86,4 +92,4 @@ export const useSwiper = () => {
     setInsideSwiper,
     insideSwiperActiveIndex,
   };
-}
+};
