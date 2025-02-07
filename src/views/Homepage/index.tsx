@@ -21,6 +21,7 @@ export const Homepage = () => {
         direction='vertical'
         slidesPerView={'auto'}
         spaceBetween={0}
+        updateOnWindowResize={true}
         mousewheel={{
           enabled: true,
           thresholdTime: 1000,
@@ -42,6 +43,7 @@ export const Homepage = () => {
             spaceBetween={0}
             modules={[Mousewheel]}
             onSwiper={setInsideSwiper}
+            updateOnWindowResize={true}
             mousewheel={{
               enabled: false,
               thresholdTime: 1000,
