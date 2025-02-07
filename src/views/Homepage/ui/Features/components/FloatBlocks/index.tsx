@@ -14,7 +14,7 @@ interface FloatBlock {
   
 const FloatBlock = ({ className, isActive, secondBlockClassName = '', children }: React.PropsWithChildren<FloatBlock>) => {
   return (
-    <div className={`absolute w-[210px] h-[180px] rounded-[24px] p-[1px] overflow-hidden opacity-${isActive ? '100' : '0'} transition-opacity lg:w-[110px] lg:h-[94px] lg:rounded-[12px] ${className}`}>
+    <div className={`absolute w-[210px] h-[180px] rounded-[24px] p-[1px] overflow-hidden opacity-${isActive ? '100' : '0'} ${isActive ? '' : 'invisible' } transition-opacity lg:w-[110px] lg:h-[94px] lg:rounded-[12px] ${className}`}>
       <div className={`absolute inset-0 z-0 rounded-[24px] bg-gradient-to-b from-[rgba(255,_200,_133,_0.1)] via-transparent to-transparent transition-opacity duration-300 ease-in-out opacity-100 lg:rounded-[12px]`} />
       <div className={`relative z-10 flex h-[180px] cursor-pointer flex-col overflow-hidden rounded-[24px] transition-all duration-300 ease-in-out bg-[rgba(255,_200,_133,_0.1)] backdrop-blur-[31.8px] lg:rounded-[12px] lg:h-[94px] ${secondBlockClassName}`} />
       {children}
@@ -67,7 +67,7 @@ const FloatBlocks = ({ activeIndex }: FloatBlocksProps) => {
         </div>
       </FloatBlock>
 
-      <FloatBlock className='top-[312px] left-[-82px] lg:left-[-25px] lg:top-[162px]' isActive={activeIndex === 3}>
+      <FloatBlock className='top-[312px] left-[-82px] lg:left-[-25px] lg:top-[162px] pointer-events-auto cursor-pointer' isActive={activeIndex === 3}>
         <div className="absolute top-[0] left-[0] w-full h-full flex flex-col items-center justify-center z-10 gap-[25px] lg:gap-[8px] lg:pt-[6px]">
           <Image src={plusAction} alt="plus images" className="w-[74px] h-[74px] lg:w-[40px] lg:h-[40px]" />
           <span className="text-[27px] leading-[23px] lg:text-[14px] font-medium">New Event</span>

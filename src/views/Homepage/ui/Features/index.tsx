@@ -22,7 +22,7 @@ const mobileTextGap = 10;
 const Features = ({ activeIndex }: FeaturesProps) => {
   return (
     <>
-      <div className='max-w-[1145px] absolute left-[50%] translate-x-[-50%] w-full h-[100vh] mx-auto lg:flex lg:flex-col'>
+      <div className='max-w-[1145px] absolute left-[50%] translate-x-[-50%] w-full h-[100vh] mx-auto lg:flex lg:flex-col pointer-events-none z-10'>
         <div
           className={`${styles.left} absolute left-[0] px-[60px] pt-[155px] transition-transform duration-300 lg:relative lg:px-[0] lg:mb-[40px] lg:pt-[60px]`}
           style={{ transform: `translateY(-${textBlockTranslateValue[activeIndex] || 0}px)` }}
@@ -75,8 +75,8 @@ const Features = ({ activeIndex }: FeaturesProps) => {
         </div>
       </div>
 
-      <div className="absolute w-full h-[24.93vh] top-[0] bg-[linear-gradient(360deg,_rgba(16,_20,_28,_0)_0%,_#10141C_60%)] lg:hidden" />
-      <div className="absolute w-full bottom-[0] top-[83.80vh] bg-[linear-gradient(360deg,_#10141C_0%,_rgba(16,_20,_28,_0)_100%)] lg:hidden" />
+      <div className="absolute w-full h-[24.93vh] top-[0] z-10 bg-[linear-gradient(360deg,_rgba(16,_20,_28,_0)_0%,_#10141C_60%)] lg:hidden" />
+      <div className="absolute w-full bottom-[0] top-[83.80vh] z-10bg-[linear-gradient(360deg,_#10141C_0%,_rgba(16,_20,_28,_0)_100%)] lg:hidden" />
     </>
   );
 };
