@@ -57,7 +57,6 @@ export const Homepage = () => {
           </Swiper>
         </SwiperSlide>
       </Swiper>
-
       <Waitlist /> 
       <Faq />
     </>

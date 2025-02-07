@@ -15,23 +15,23 @@ export const useSwiper = () => {
   useEffect(() => {
     if (!mainSwiper || !insideSwiper) return;
 
+    mainSwiper.on('slideChangeTransitionStart', (swiper) => {
+      if (swiper.previousIndex === INSIDE_SILDER_POSITION) {
+        insideSwiper.mousewheel.disable();
+      }
+    });
+
     mainSwiper.on('slideChangeTransitionEnd', (swiper) => {
-      if (swiper.activeIndex === MAIN_SLIDER_START_INDEX) swiper.allowSlideNext = true;
+      if (swiper.activeIndex === INSIDE_SILDER_POSITION - 1) swiper.allowSlideNext = true;
       if (swiper.activeIndex === INSIDE_SILDER_POSITION + 1) swiper.allowSlidePrev = true;
 
       if (swiper.activeIndex === INSIDE_SILDER_POSITION) {
-        if (swiper.previousIndex === MAIN_SLIDER_START_INDEX) swiper.allowSlideNext = false;
+        if (swiper.previousIndex === INSIDE_SILDER_POSITION - 1) swiper.allowSlideNext = false;
         if (swiper.previousIndex === INSIDE_SILDER_POSITION + 1) swiper.allowSlidePrev = false;
 
         setTimeout(() => {
           insideSwiper.mousewheel.enable();
         }, 500);
-      }
-    });
-  
-    mainSwiper.on('slideChangeTransitionStart', (swiper) => {
-      if (swiper.activeIndex === INSIDE_SILDER_POSITION + 1 || swiper.activeIndex === MAIN_SLIDER_START_INDEX) {
-        insideSwiper.mousewheel.disable();
       }
     });
   
@@ -41,14 +41,6 @@ export const useSwiper = () => {
           swiper.params.mousewheel.releaseOnEdges = false;    
         }
       }, 500);
-    });
-
-    mainSwiper.on('reachEnd', (swiper) => {
-      setTimeout(() => {
-        if (typeof swiper.params.mousewheel === 'object') {
-          swiper.params.mousewheel.releaseOnEdges = true;
-        }
-      }, 1500);
     });
   }, [mainSwiper, insideSwiper]);
 
@@ -70,7 +62,23 @@ export const useSwiper = () => {
         mainSwiper.allowSlideNext = false;
         mainSwiper.allowSlidePrev = false;
       }
-    })
+    });
+
+    insideSwiper.on('slideChange', (swiper) => {
+      setTimeout(() => {
+        if (typeof mainSwiper.params.mousewheel === 'object') {
+          mainSwiper.params.mousewheel.releaseOnEdges = false;    
+        }
+      }, 500);
+    });
+
+    insideSwiper.on('reachEnd', () => {
+      setTimeout(() => {
+        if (typeof mainSwiper.params.mousewheel === 'object') {
+          mainSwiper.params.mousewheel.releaseOnEdges = true;
+        }
+      }, 1500);
+    });
   }, [mainSwiper, insideSwiper])
 
   return {
