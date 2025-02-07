@@ -6,4 +6,13 @@
 .swiper-slide {
   position: relative;
   overflow: hidden;
+  height: auto;
+}
+
+.inside-swiper {
+  height: 100%;
+}
+
+.swiper-slide-with-swiper {
+  height: 100vh;
 }
