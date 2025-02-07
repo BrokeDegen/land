@@ -1,0 +1,33 @@
+.bannerText {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 260px;
+  font-weight: bold;
+  line-height: 245px;
+  background: linear-gradient(180deg, #dee4f1 0%, #80848b 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.foxText {
+  background: linear-gradient(
+    90deg,
+    #cbdc9b 3.05%,
+    rgba(203, 124, 62, 0.693284) 25.45%,
+    rgba(177, 125, 85, 0.4) 46.2%,
+    #dc9b9b 81.02%
+  );
+  -webkit-background-clip: text;
+}
+
+@media (max-width: 1300px) {
+  .section {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 767px) {
+  .bannerText {
+    font-size: 116px;
+    line-height: 105px;
+  }
+}

@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import classNames from 'classnames';
 import MobileMenu from './MobileMenu';
+import Logo from '@/shared/icons/GenjiLogo.svg?url';
 
 const menuItems = [
   {
@@ -26,8 +28,8 @@ const menuItems = [
 
 export const Header = () => {
   return (
-    <div className='flex h-[70px] items-center gap-[120px] border-b border-border py-[20px] pl-[60px] md:h-auto md:px-[16px]'>
-      <div className='text-white'>Flipfox logo</div>
+    <div className='flex h-[70px] items-center gap-[120px] border-b border-border py-[20px] pl-[60px] lg:border-none lg:pr-[60px] md:h-auto md:px-[16px]'>
+      <Image src={Logo} alt='logo' />
       <ul className='flex items-center gap-11 lg:hidden'>
         {menuItems.map(({ text, url }) => (
           <li key={text}>
