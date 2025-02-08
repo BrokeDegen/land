@@ -1,12 +1,13 @@
+'use client';
+
 import { features } from './constants/features';
 import glass from './assets/glass.png';
 import Image from 'next/image';
 import FloatBlocks from './components/FloatBlocks';
 import styles from './styles.module.scss';
-
-interface FeaturesProps {
-  activeIndex: number;
-}
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useSwiper } from './useSwiper';
+import { Mousewheel } from 'swiper/modules';
 
 const baseTranslate = 340;
 const textBlockTranslateValue: Record<number, number> = {
@@ -17,11 +18,13 @@ const textBlockTranslateValue: Record<number, number> = {
   4: baseTranslate * 4 + 35,
 }
 const mobileTextWidth = 236;
-const mobileTextGap = 10;
+const mobileTextGap = 10
 
-const Features = ({ activeIndex }: FeaturesProps) => {
-  return (
-    <>
+const Features = () => {
+  const { setSwiper, activeIndex } = useSwiper();
+
+  const section = (
+    <section className='absolute top-0 left-0 w-full h-screen features-section'>
       <div className='max-w-[1145px] absolute left-[50%] translate-x-[-50%] w-full h-[100vh] mx-auto lg:flex lg:flex-col pointer-events-none z-10'>
         <div
           className={`${styles.left} absolute left-[0] px-[60px] pt-[155px] transition-transform duration-300 lg:relative lg:px-[0] lg:mb-[40px] lg:pt-[60px]`}
@@ -77,6 +80,26 @@ const Features = ({ activeIndex }: FeaturesProps) => {
 
       <div className="absolute w-full h-[24.93vh] top-[0] z-10 bg-[linear-gradient(360deg,_rgba(16,_20,_28,_0)_0%,_#10141C_60%)] lg:hidden" />
       <div className="absolute w-full bottom-[0] top-[83.80vh] z-10bg-[linear-gradient(360deg,_#10141C_0%,_rgba(16,_20,_28,_0)_100%)] lg:hidden" />
+    </section>
+  );
+  
+  return (
+    <>
+      <Swiper
+        spaceBetween={0}
+        slidesPerView={1}
+        modules={[Mousewheel]}
+        onSwiper={setSwiper}
+        updateOnWindowResize={true}
+        mousewheel={{
+          enabled: false,
+        }}
+      >
+        {section}
+        {features.map((_, index) => (
+          <SwiperSlide key={index} className="h-full" />
+        ))}
+      </Swiper>
     </>
   );
 };
