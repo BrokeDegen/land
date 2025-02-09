@@ -2,6 +2,8 @@ export const roadmapBlocks = [
   {
     id: 1,
     title: 'Q2 2025',
+    isActiveQuarter: true,
+    type: 'orange',
     items: [
       {
         id: 1,
@@ -20,6 +22,8 @@ export const roadmapBlocks = [
   {
     id: 2,
     title: 'Q2 2025',
+    type: 'silver',
+    isActiveQuarter: false,
     items: [
       {
         id: 1,
@@ -46,6 +50,8 @@ export const roadmapBlocks = [
   {
     id: 3,
     title: 'Q2 2025',
+    type: 'silver',
+    isActiveQuarter: false,
     items: [
       {
         id: 1,
@@ -64,6 +70,8 @@ export const roadmapBlocks = [
   {
     id: 4,
     title: 'Q2 2025',
+    type: 'silver',
+    isActiveQuarter: false,
     items: [
       {
         id: 1,
@@ -82,6 +90,8 @@ export const roadmapBlocks = [
   {
     id: 5,
     title: 'Q2 2025',
+    type: 'silver',
+    isActiveQuarter: false,
     items: [
       {
         id: 1,
@@ -100,6 +110,8 @@ export const roadmapBlocks = [
   {
     id: 6,
     title: 'Q2 2025',
+    type: 'silver',
+    isActiveQuarter: false,
     items: [
       {
         id: 1,
