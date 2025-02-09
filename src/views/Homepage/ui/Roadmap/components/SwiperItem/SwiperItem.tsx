@@ -4,6 +4,7 @@ import CheckIcon from '../../assets/check-icon.svg?url';
 import styles from './styles.module.scss';
 import ActiveQuarterArrow from '../../assets/arrow-active-quarter.svg?url';
 import PoinstImage from '../../assets/points.svg?url';
+import classNames from 'classnames';
 
 export const SwiperItem = ({
   block,
@@ -78,7 +79,10 @@ const Arrows = ({ isActiveQuarter }: any) => {
           <Image
             src={ActiveQuarterArrow}
             alt='arrow icon'
-            className={`absolute left-[50%] top-[-90px] z-10 translate-x-[-50%] ${styles.arrowActiveQuarter}`}
+            className={classNames(
+              'absolute left-[50%] top-[-90px] z-10 translate-x-[-50%]',
+              styles.arrowActiveQuarter,
+            )}
           />
           <Image
             src={ActiveQuarterArrow}
