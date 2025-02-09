@@ -1,0 +1,22 @@
+.shadow {
+  background: linear-gradient(
+    270deg,
+    rgb(16, 20, 28) 0%,
+    rgba(8, 9, 14, 0) 100%
+  );
+  width: 250px;
+  height: 580px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.btn {
+  background: linear-gradient(90deg, #ff8623 0%, #ffe946 100%);
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+}
