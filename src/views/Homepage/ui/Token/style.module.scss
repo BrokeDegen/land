@@ -1,0 +1,53 @@
+.flox {
+  background: linear-gradient(
+    180deg,
+    rgba(96, 94, 103, 0.39) 0%,
+    rgba(27, 28, 31, 0) 75%
+  );
+  background-clip: text;
+}
+
+.gradientX {
+  background: linear-gradient(
+    90deg,
+    #202736 18.61%,
+    #d45067 37%,
+    #d45067 62%,
+    #202736 79.24%
+  );
+}
+.gradientY {
+  transform: rotate(90deg);
+  bottom: -160px;
+  background: linear-gradient(
+    90deg,
+    #df9e54 44.38%,
+    rgba(45, 47, 67, 0.313633) 82.56%,
+    rgba(54, 67, 92, 0) 100%
+  );
+  transform: translateX(-50%, -50%);
+}
+
+@media (max-width: 1024px) {
+  .gradientX {
+    background: linear-gradient(
+      90deg,
+      #202736 10%,
+      #d45067 37%,
+      #d45067 62%,
+      #202736 90%
+    );
+  }
+}
+
+@media (max-width: 767px) {
+  .gradientX {
+    background: linear-gradient(
+      90deg,
+      #202736 5%,
+      #d45067 37%,
+      #d45067 62%,
+      #202736 95%
+    );
+  }
+}
