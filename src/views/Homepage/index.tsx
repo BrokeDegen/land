@@ -9,8 +9,8 @@ export const Homepage = () => {
     <div className='flex flex-col'>
       <Purchase />
       <Media />
-      <Waitlist /> 
       <Faq />
+      <Waitlist />
     </div>
   );
 };
