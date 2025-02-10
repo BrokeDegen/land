@@ -1,0 +1,23 @@
+<svg width="23" height="82" viewBox="0 0 23 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 1L12 56" stroke="url(#paint0_linear_216_707)" stroke-linecap="round"/>
+<circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1.31134e-07 1 1 -1.31134e-07 0 64)" fill="#F4C770"/>
+<circle cx="21.5" cy="65.5" r="1.5" transform="rotate(90 21.5 65.5)" fill="#F4C770"/>
+<circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1.31134e-07 1 1 -1.31134e-07 5 69)" fill="#F4C770"/>
+<circle cx="16.5" cy="70.5" r="1.5" transform="rotate(90 16.5 70.5)" fill="#F4C770"/>
+<circle cx="16.5" cy="65.5" r="1.5" transform="rotate(90 16.5 65.5)" fill="#F4C770"/>
+<circle cx="11.5" cy="65.5" r="1.5" transform="rotate(90 11.5 65.5)" fill="#F4C770"/>
+<circle cx="6.5" cy="65.5" r="1.5" transform="rotate(90 6.5 65.5)" fill="#F4C770"/>
+<circle cx="11.5" cy="70.5" r="1.5" transform="rotate(90 11.5 70.5)" fill="#F4C770"/>
+<circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1.31134e-07 1 1 -1.31134e-07 10 74)" fill="#F4C770"/>
+<circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1.31134e-07 1 1 -1.31134e-07 0 69)" fill="#F4C770"/>
+<circle cx="21.5" cy="70.5" r="1.5" transform="rotate(90 21.5 70.5)" fill="#F4C770"/>
+<circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1.31134e-07 1 1 -1.31134e-07 5 74)" fill="#F4C770"/>
+<circle cx="16.5" cy="75.5" r="1.5" transform="rotate(90 16.5 75.5)" fill="#F4C770"/>
+<circle cx="1.5" cy="1.5" r="1.5" transform="matrix(1.31134e-07 1 1 -1.31134e-07 10 79)" fill="#F4C770"/>
+<defs>
+<linearGradient id="paint0_linear_216_707" x1="11.5" y1="1" x2="11.5" y2="56" gradientUnits="userSpaceOnUse">
+<stop stop-color="#10141C" stop-opacity="0"/>
+<stop offset="1" stop-color="#F5C36A"/>
+</linearGradient>
+</defs>
+</svg>
