@@ -2,6 +2,7 @@ import React from 'react';
 import Media from './ui/Media';
 import Waitlist from './ui/Waitlist';
 import Faq from './ui/Faq';
+import Token from './ui/Token';
 import Purchase from './ui/Purchase';
 import Roadmap from './ui/Roadmap';
 
@@ -11,8 +12,9 @@ export const Homepage = () => {
       <Purchase />
       <Roadmap />
       <Media />
-      <Waitlist />
+      <Token />
       <Faq />
+      <Waitlist />
     </div>
   );
 };

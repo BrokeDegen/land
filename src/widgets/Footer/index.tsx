@@ -14,7 +14,7 @@ export const Footer = () => {
     [width],
   );
 
-  return <div className='bg-[#171B23]'>{Content}</div>;
+  return <div className='relative bg-[#171B23]'>{Content}</div>;
 };
 
 const FooterDesktop = () => (
