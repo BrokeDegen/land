@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { questions } from './constants/questions';
-import { FAQItem } from './components/FaqItem';
+import { FAQItem } from './ui/FaqItem';
 
 const Faq = () => {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -11,7 +11,7 @@ const Faq = () => {
   };
 
   return (
-    <div className='space-between mx-auto flex w-full max-w-[1440px] gap-[101px] px-[60px] pb-[141px] pt-[123px] xl:flex-col md:gap-[20px] md:px-[16px] md:pb-[0px] md:pt-[60px] md:pt-[81px]'>
+    <div className='space-between mx-auto flex w-full max-w-[1440px] gap-[101px] px-[60px] pb-[141px] pt-[123px] xl:flex-col md:gap-[20px] md:px-[16px] md:pb-[0px] md:pt-[81px]'>
       <div>
         <h2 className='max-w-[369px] text-[70px] font-bold uppercase leading-[77px] md:text-[48px] md:leading-[52.8px]'>
           Frequent Questions

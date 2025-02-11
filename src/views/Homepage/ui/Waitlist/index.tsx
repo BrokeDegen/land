@@ -2,8 +2,7 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import bgImg from './assets/bg.webp';
-import { Button } from '@/shared/components';
-import ModalWrapper from '@/widgets/ModalWrapper';
+import { Button } from '@/shared/ui';
 import { useState } from 'react';
 import ArrowTransparent from './assets/ArrowTransparent.svg?url';
 import ArrowVisible from './assets/ArrowVisible.svg?url';
@@ -14,6 +13,7 @@ import MobileArrowVisible from './assets/AddaptiveArrowVisible.svg?url';
 import MobileArrowMedium from './assets/AddaptiveArrowMedium.svg?url';
 import MobileArrowTransparent from './assets/AddaptiveArrowTransparent.svg?url';
 import classNames from 'classnames';
+import ModalWrapper from '@/shared/ui/ModalWrapper';
 
 const Waitlist = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -205,7 +205,7 @@ const MobileSquareGradientLeft = () => {
   return (
     <div
       className={classNames(
-        'absolute bottom-[-15vw] left-[-10vw] hidden h-[100px] w-[30vw] rounded-[100px/50px] rounded-full blur-[50px] md:block sm:bottom-[-20vw] sm:left-[-7vw]',
+        'absolute bottom-[-15vw] left-[-10vw] hidden h-[100px] w-[30vw] rounded-full blur-[50px] md:block sm:bottom-[-20vw] sm:left-[-7vw]',
         styles.gradientSide,
       )}
     />
@@ -216,7 +216,7 @@ const MobileSquareGradientRight = () => {
   return (
     <div
       className={classNames(
-        'absolute bottom-[-13vw] right-[-10vw] hidden h-[100px] w-[30vw] rounded-[100px/50px] rounded-full blur-[50px] md:block sm:bottom-[-28vw] sm:right-[-7vw]',
+        'absolute bottom-[-13vw] right-[-10vw] hidden h-[100px] w-[30vw] rounded-full blur-[50px] md:block sm:bottom-[-28vw] sm:right-[-7vw]',
         styles.gradientSide,
       )}
     />
@@ -227,7 +227,7 @@ const MobileEllipseGradients = () => {
   return (
     <div
       className={classNames(
-        'absolute bottom-[-90px] left-1/2 hidden h-[100px] w-[80vw] -translate-x-1/2 transform rounded-[100px/50px] rounded-full blur-[50px] md:block sm:bottom-[-100px]',
+        'absolute bottom-[-90px] left-1/2 hidden h-[100px] w-[80vw] -translate-x-1/2 transform rounded-full blur-[50px] md:block sm:bottom-[-100px]',
         styles.gradient,
       )}
     />

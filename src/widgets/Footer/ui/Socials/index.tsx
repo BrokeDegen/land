@@ -39,7 +39,7 @@ const SocialCircle = (props: React.SVGProps<SVGSVGElement>) => (
     <path
       d='M30.1977 1.375C39.2195 3.50408 46.3286 10.5777 48.5 19.5742M18.8023 1.375C9.78051 3.50408 2.6714 10.5777 0.5 19.5742M18.8023 49.375C9.78051 47.2459 2.6714 40.1723 0.5 31.1758M30.1977 49.375C39.2195 47.2459 46.3286 40.1723 48.5 31.1758'
       stroke='#FFB764'
-      stroke-linecap='round'
+      strokeLinecap='round'
     />
   </svg>
 );

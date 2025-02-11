@@ -3,12 +3,14 @@
 import { useOnClickOutside } from '@/shared/hooks/useOnClickOutside';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const MobileMenu = ({
-  menuItems,
-}: {
-  menuItems: Array<{ text: string; url: string }>;
-}) => {
+interface MenuItem {
+  text: string;
+  url: string;
+}
+
+const MobileMenu = ({ menuItems }: { menuItems: MenuItem[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +26,7 @@ const MobileMenu = ({
   );
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -36,32 +38,36 @@ const MobileMenu = ({
       <div onClick={toggleMenu} ref={triggerRef} className='cursor-pointer'>
         <MenuIcon />
       </div>
-      <div
-        ref={menuRef}
-        className={`fixed left-0 top-0 z-[100] flex h-screen w-[100vw] flex-col justify-between gap-[40px] overflow-y-hidden bg-black transition-[max-height,opacity] duration-500 ${
-          isOpen ? 'max-h-[100vh] opacity-100' : 'max-h-0 opacity-0'
-        }`}
-      >
-        <div className='flex items-center justify-between p-[20px_16px]'>
-          <div className='text-white'>Flipfox logo</div>
-          <div onClick={toggleMenu}>
-            <CloseIcon />
-          </div>
-        </div>
 
-        <nav className='flex flex-col items-center justify-between gap-[40px] text-[20px] font-semibold tracking-wider text-white'>
-          {menuItems.map(({ text, url }) => (
-            <Link key={text} href={url} onClick={() => setIsOpen(false)}>
-              {text}
-            </Link>
-          ))}
-        </nav>
-        <div className='mx-[10px] mb-[40px]'>
-          {/* <Button className="p-[12px_20px] justify-center " showArrow>
-            Sign In
-          </Button> */}
-        </div>
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            ref={menuRef}
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            style={{ transformOrigin: 'top' }}
+            className='fixed left-0 top-0 z-[100] flex h-screen w-full flex-col justify-between gap-[40px] overflow-hidden bg-black'
+          >
+            <div className='flex items-center justify-between p-[20px_16px]'>
+              <div className='text-white'>Flipfox logo</div>
+              <div onClick={toggleMenu} className='cursor-pointer'>
+                <CloseIcon />
+              </div>
+            </div>
+
+            <nav className='flex flex-col items-center justify-between gap-[40px] text-[20px] font-semibold tracking-wider text-white'>
+              {menuItems.map(({ text, url }) => (
+                <Link key={text} href={url} onClick={() => setIsOpen(false)}>
+                  {text}
+                </Link>
+              ))}
+            </nav>
+            <div className='mx-[10px] mb-[40px]'></div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

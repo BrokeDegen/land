@@ -15,7 +15,7 @@ export const Button = ({ className, children, onClick }: ButtonProps) => {
     <button
       onClick={onClick}
       className={classNames(
-        'h-[64px] w-[292px] rounded-[16px] bg-[linear-gradient(90deg,_#FFAF56_0%,_#FFFD82_100%)] text-lg font-bold text-black transition-all [outline:_5px_solid_#FFDB7929] hover:brightness-110',
+        'h-[64px] rounded-[16px] bg-[linear-gradient(90deg,_#FFAF56_0%,_#FFFD82_100%)] text-lg font-bold text-black transition-all [outline:_5px_solid_#FFDB7929] hover:brightness-110',
         className,
       )}
     >

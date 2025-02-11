@@ -2,8 +2,8 @@ import TokenImage from './assets/Token.png';
 import Image from 'next/image';
 import Gradient from './assets/Gradient.svg?url';
 import styles from './style.module.scss';
-import { BenefitsSection } from './components/BenefitsSection';
-import { ListingInfo } from './components/ListingInfo';
+import { BenefitsSection } from './ui/BenefitsSection';
+import { ListingInfo } from './ui/ListingInfo';
 
 const Token = () => {
   return (
@@ -23,13 +23,13 @@ const Token = () => {
             className={`via-red-500 h-[2px] w-full md:w-[90vw] sm:w-[100vw] ${styles.gradientX}`}
           />
           <div
-            className={`via-red-500 absolute relative h-[2px] w-[382px] ${styles.gradientY}`}
+            className={`via-red-500 relative h-[2px] w-[382px] ${styles.gradientY}`}
           />
 
           <Image
             src={TokenImage}
             alt='Token Image'
-            className='absolute bottom-[-145px] left-0 left-1/2 right-0 z-10 -translate-x-1/2 transform md:bottom-[-85px] md:h-[156px] md:w-[236px]'
+            className='absolute bottom-[-145px] left-1/2 right-0 z-10 -translate-x-1/2 transform md:bottom-[-85px] md:h-[156px] md:w-[236px]'
           />
           <Image
             src={Gradient}

@@ -1,8 +1,8 @@
 'use client';
-import { Socials } from './components/Socials';
-import { Information } from './components/Information';
-import { Copyright } from './components/Copyright';
-import { MobileIcon } from './components/MobileIcon';
+import { Socials } from './ui/Socials';
+import { Information } from './ui/Information';
+import { Copyright } from './ui/Copyright';
+import { MobileIcon } from './ui/MobileIcon';
 import { useWindowWidth } from '@/shared/hooks/useWindowWidth';
 import { useMemo } from 'react';
 

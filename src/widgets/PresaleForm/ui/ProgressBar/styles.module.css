@@ -1,0 +1,13 @@
+.bar {
+  height: 100%;
+  box-shadow: none;
+  position: relative;
+  height: 9px;
+}
+
+.wrapper {
+  background-color: #3f3f3f;
+  box-shadow: none;
+  width: 100%;
+  height: 9px;
+}

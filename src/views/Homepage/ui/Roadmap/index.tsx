@@ -8,7 +8,7 @@ import 'swiper/css';
 import { roadmapBlocks } from './consts';
 import { useWindowWidth } from '@/shared/hooks/useWindowWidth';
 import classNames from 'classnames';
-import { SwiperItem } from './components/SwiperItem/SwiperItem';
+import { SwiperItem } from './ui/SwiperItem/SwiperItem';
 
 const Roadmap = () => {
   const swiperRef = useRef<any>(null);
