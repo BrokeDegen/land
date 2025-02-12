@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 const Media = () => {
   return (
-    <div className='mx-auto max-w-[1440px] rounded-t-[45px] bg-black px-[40px] pb-[90px]'>
+    <div className='relative mx-auto max-w-[1440px] rounded-t-[45px] bg-black px-[40px] pb-[90px]'>
       <p className='py-[38px] text-center text-lg md:pb-[20px]'>
         Seen in Media
       </p>

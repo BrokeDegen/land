@@ -8,11 +8,15 @@ import { SocialButton } from './ui/SocialButton';
 import TelegramIcon from '@/shared/icons/Telegram.svg?url';
 import DiscordIcon from '@/shared/icons/Discord.svg?url';
 import XIcon from '@/shared/icons/Twitter.svg?url';
+import classNames from 'classnames';
 
 const Purchase = () => {
   return (
     <div
-      className={`outline-solid mx-auto flex w-[-webkit-fill-available] max-w-[1440px] outline outline-1 outline-[#202736] ${styles.section}`}
+      className={classNames(
+        'mx-auto flex w-[-webkit-fill-available] max-w-[1440px]',
+        styles.section,
+      )}
     >
       <div className='outline-solid relative flex-1 outline-1 outline-[#202736]'>
         <div className='md:mt-[50px]'>

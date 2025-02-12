@@ -25,7 +25,8 @@ const Roadmap = () => {
       </h2>
 
       <div className='relative h-[fit-content]'>
-        <SwiperShadow isMobile={isMobile} />
+        <SwiperShadow isLeft={true} isMobile={isMobile} />
+        <SwiperShadow isRight={true} isMobile={isMobile} />
         <Swiper
           spaceBetween={20}
           slidesPerView={isMobile ? 1 : isTablet ? 2 : 3}
@@ -88,6 +89,31 @@ const Roadmap = () => {
 
 export default Roadmap;
 
-const SwiperShadow = ({ isMobile }: { isMobile: boolean }) => {
-  return <div className={classNames(styles.shadow, { hidden: isMobile })} />;
+const SwiperShadow = ({
+  isMobile,
+  isRight = true,
+  isLeft,
+}: {
+  isMobile: boolean;
+  isRight?: boolean;
+  isLeft?: boolean;
+}) => {
+  return (
+    <div
+      className={classNames(
+        styles.shadow,
+        { hidden: isMobile },
+        isRight &&
+          classNames(
+            'absolute right-0 top-1/2 -translate-y-1/2',
+            styles.shadowRight,
+          ),
+        isLeft &&
+          classNames(
+            'absolute left-0 top-1/2 -translate-y-1/2',
+            styles.shadowLeft,
+          ),
+      )}
+    />
+  );
 };

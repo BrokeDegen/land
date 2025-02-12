@@ -33,12 +33,14 @@ export const SwiperItem = ({
               <>
                 <RedBorder />
                 <CircleOrangeGradient />
+                <EllipsisOrangeGradient />
               </>
             )}
             {type === 'silver' && (
               <>
                 <SilverBorder />
                 <CircleSilverGradient />
+                <EllipsisSilverGradient />
               </>
             )}
 
@@ -99,6 +101,10 @@ const CircleOrangeGradient = () => {
   return <div className={styles.circleOrangeGradient} />;
 };
 
+const EllipsisOrangeGradient = () => {
+  return <div className={styles.ellipsisOrangeGradient} />;
+};
+
 const RedBorder = () => {
   return <div className={styles.redBorder} />;
 };
@@ -109,4 +115,8 @@ const CircleSilverGradient = () => {
 
 const SilverBorder = () => {
   return <div className={styles.silverBorder} />;
+};
+
+const EllipsisSilverGradient = () => {
+  return <div className={styles.ellipsisSilverGradient} />;
 };
