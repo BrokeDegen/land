@@ -1,17 +1,15 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { useWindowWidth } from '@/shared/hooks/useWindowWidth';
+import { useOnClickOutside } from '@/shared/hooks/useOnClickOutside';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   IPaymentMethod,
   IPaymentOption,
   PAYMENT_METHODS,
-  SOLANA_METHOD,
-} from './lib';
-import { SupportedChainKey } from '../../../../entities/wagmi';
-import Image from 'next/image';
-import { useMediaQuery, useOnClickOutside } from 'usehooks-ts';
-import { useSignals } from '@preact/signals-react/runtime';
-import { useTranslations } from 'next-intl';
-import { Drawer } from 'vaul';
-import { CurrentBlockchainContext } from '@/entities/currentBlockchain/providers';
+} from '../../lib/paymentOptions';
+import { SupportedChainKey } from '@/entities/wagmi';
 
 interface NetworkSwitcherProps<TNetworks extends string = string> {
   paymentOption: IPaymentOption;
@@ -20,10 +18,7 @@ interface NetworkSwitcherProps<TNetworks extends string = string> {
   isApproving: boolean;
   switchNetwork: (network: TNetworks) => Promise<void>;
   currentNetwork: TNetworks;
-  evmAddress?: string;
-  solAddress?: string;
-  setIsMergeModalVisible: (isVisible: boolean) => void;
-  profileMerged?: boolean;
+  address?: string;
 }
 
 export function NetworkSwitcher({
@@ -33,13 +28,10 @@ export function NetworkSwitcher({
   isBuying,
   isApproving,
   setPaymentOption,
-  evmAddress,
-  solAddress,
-  setIsMergeModalVisible,
-  profileMerged,
+  address,
 }: NetworkSwitcherProps<SupportedChainKey>) {
-  useSignals();
-  const isMd = useMediaQuery('(max-width: 767px)');
+  const width = useWindowWidth();
+  const isMd = width <= 767;
   const t = useTranslations('form');
   const [paymentMethod, setPaymentMethod] = useState<
     IPaymentMethod<SupportedChainKey>
@@ -49,32 +41,13 @@ export function NetworkSwitcher({
 
   const methodMenuRef = useRef<HTMLDivElement | null>(null);
   const methodTriggerRef = useRef<HTMLDivElement | null>(null);
-
   const optionMenuRef = useRef<HTMLDivElement | null>(null);
   const optionTriggerRef = useRef<HTMLDivElement | null>(null);
-  const { currentBlockchain, setCurrentBlockchain } = useContext(
-    CurrentBlockchainContext,
-  );
 
   const onPaymentMethodChange = async (
     method: IPaymentMethod<SupportedChainKey>,
   ) => {
-    if (method.id === 'sol') {
-      if (evmAddress && !profileMerged) {
-        setIsMergeModalVisible(true);
-      }
-
-      setPaymentOption(method.options[0]);
-      setMethodMenuVisible(false);
-      await switchNetwork(method.id);
-      setCurrentBlockchain?.('sol');
-    } else if (method.id !== 'tron' && method.id !== 'card') {
-      if (solAddress && !profileMerged) {
-        setIsMergeModalVisible(true);
-      }
-      setCurrentBlockchain?.('eth');
-    }
-    if (method.id === 'tron' || method.id === 'card') {
+    if (method.id === 'tron' || method.id === 'card' || method.id === 'sol') {
       setPaymentMethod(method);
     } else if (method.id === currentNetwork) {
       setPaymentMethod(method);
@@ -98,9 +71,8 @@ export function NetworkSwitcher({
         (method) => method.id === currentNetwork,
       );
       if (!method) return;
-
       setPaymentMethod(method);
-      setPaymentOption(method?.options[0]);
+      setPaymentOption(method.options[0]);
     }
   }, [currentNetwork]);
 
@@ -111,199 +83,254 @@ export function NetworkSwitcher({
     }
   }, [isBuying, isApproving]);
 
-  useEffect(() => {
-    if (currentBlockchain === 'sol') {
-      setPaymentMethod(SOLANA_METHOD);
-      setPaymentOption(SOLANA_METHOD.options[0]);
-    }
-    if (currentBlockchain === 'eth' && paymentMethod.id === SOLANA_METHOD.id) {
-      setPaymentMethod(PAYMENT_METHODS[1]);
-      setPaymentOption(PAYMENT_METHODS[1].options[0]);
-    }
-  }, [currentBlockchain]);
+  useOnClickOutside(
+    [
+      methodMenuRef as React.RefObject<HTMLElement>,
+      methodTriggerRef as React.RefObject<HTMLElement>,
+    ],
+    () => {
+      setMethodMenuVisible(false);
+    },
+  );
+  useOnClickOutside(
+    [
+      optionMenuRef as React.RefObject<HTMLElement>,
+      optionTriggerRef as React.RefObject<HTMLElement>,
+    ],
+    () => {
+      setOptionMenuVisible(false);
+    },
+  );
 
-  useOnClickOutside([methodMenuRef, methodTriggerRef], () => {
-    setMethodMenuVisible(false);
-  });
-  useOnClickOutside([optionMenuRef, optionTriggerRef], () => {
-    setOptionMenuVisible(false);
-  });
+  // Variants for desktop dropdowns
+  const dropdownVariants = {
+    closed: { opacity: 0, height: 0, transition: { duration: 0.3 } },
+    open: { opacity: 1, height: 'auto', transition: { duration: 0.3 } },
+  };
+
+  // Variants for mobile modal (overlay and content)
+  const modalOverlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 0.7, transition: { duration: 0.3 } },
+  };
+
+  const modalContentVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.3 } },
+  };
 
   return (
     <div className='grid grid-cols-[calc(50%-1rem)_calc(50%-1rem)] items-center justify-between gap-[10px] text-[14px] md:grid-cols-[calc(50%-4px)_calc(50%-8px)]'>
+      {/* Payment Method */}
       <div className='flex w-full flex-col'>
-        <p className='uppercase text-[#929292]'>{t('selectMethod')}:</p>
-        <Drawer.Root
-          open={methodMenuVisible}
-          onClose={() => setMethodMenuVisible(false)}
+        <p className='uppercase text-white'>{t('selectMethod')}:</p>
+        <div
+          ref={methodTriggerRef}
+          className={`z-[35] mt-[9px] flex h-[41px] cursor-pointer items-center gap-[12px] bg-black px-[12px] py-[8px] ${
+            methodMenuVisible ? 'bg-black' : ''
+          }`}
+          onClick={() => setMethodMenuVisible(!methodMenuVisible)}
         >
-          <div
-            className={`z-[35] mt-[9px] flex h-[41px] cursor-pointer items-center gap-[12px] border-[2px] border-b-[rgba(17,17,17,0.3)] border-l-[rgba(255,255,255,0.3)] border-r-[rgba(17,17,17,0.3)] border-t-[rgba(255,255,255,0.3)] bg-[#2D2B37] px-[12px] py-[8px] ${
-              methodMenuVisible && 'bg-[#303030]'
-            } `}
-            ref={methodTriggerRef}
-            onClick={() => setMethodMenuVisible(!methodMenuVisible)}
-          >
-            <Image
-              src={paymentMethod.img}
-              alt={paymentMethod.name}
-              className='h-[24px] w-[24px]'
-            />
-            <p className='overflow-hidden text-ellipsis whitespace-nowrap text-[14px] text-white'>
-              {paymentMethod.name}
-            </p>
-            <ChevronIcon
-              className={`ml-auto h-auto w-[12px] flex-shrink-0 transition-all ${
-                methodMenuVisible && 'rotate-[180deg]'
-              }`}
-            />
+          <Image
+            src={paymentMethod.img}
+            alt={paymentMethod.name}
+            className='h-[24px] w-[24px]'
+          />
+          <p className='overflow-hidden text-ellipsis whitespace-nowrap text-[14px] text-white'>
+            {paymentMethod.name}
+          </p>
+          <motion.div animate={{ rotate: methodMenuVisible ? 180 : 0 }}>
+            <ChevronIcon className='ml-auto h-auto w-[12px] flex-shrink-0' />
+          </motion.div>
+        </div>
+
+        {isMd ? (
+          // Mobile modal version
+          <AnimatePresence>
+            {methodMenuVisible && (
+              <>
+                <motion.div
+                  className='fixed inset-0 z-[100] bg-[#0F2430]'
+                  initial='hidden'
+                  animate='visible'
+                  exit='hidden'
+                  variants={modalOverlayVariants}
+                  onClick={() => setMethodMenuVisible(false)}
+                />
+                <motion.div
+                  className='fixed bottom-[33px] left-[30px] right-[30px] z-[200] outline-none'
+                  initial='hidden'
+                  animate='visible'
+                  exit='hidden'
+                  variants={modalContentVariants}
+                >
+                  <div className='flex flex-col'>
+                    {PAYMENT_METHODS.map((method) => (
+                      <div
+                        key={method.id}
+                        className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] bg-black px-[12px] py-[8px] transition-all hover:bg-[#636363]'
+                        onClick={() => onPaymentMethodChange(method)}
+                      >
+                        <Image
+                          src={method.img}
+                          alt={method.name}
+                          className='w-[24px]'
+                        />
+                        <span className='text-white'>{method.name}</span>
+                        {method.id === paymentMethod.id && (
+                          <CheckedIcon className='ml-auto' />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        ) : (
+          // Desktop dropdown version
+          <div ref={methodMenuRef} className='relative'>
+            <AnimatePresence>
+              {methodMenuVisible && (
+                <motion.div
+                  initial='closed'
+                  animate='open'
+                  exit='closed'
+                  variants={dropdownVariants}
+                  className='absolute left-0 right-0 top-0 z-[4] flex flex-col overflow-hidden'
+                >
+                  <div className='flex flex-col bg-black'>
+                    {PAYMENT_METHODS.map((method) => (
+                      <div
+                        key={method.id}
+                        className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] bg-black px-[12px] py-[8px] transition-all hover:bg-[#636363]'
+                        onClick={() => onPaymentMethodChange(method)}
+                      >
+                        <Image
+                          src={method.img}
+                          alt={method.name}
+                          className='w-[24px]'
+                        />
+                        <span className='text-white'>{method.name}</span>
+                        {method.id === paymentMethod.id && (
+                          <CheckedIcon className='ml-auto' />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-          {isMd ? (
-            <Drawer.Portal>
-              <Drawer.Overlay
-                className='fixed inset-0 z-[100] bg-[#0F2430]/70'
-                onClick={() => setMethodMenuVisible(false)}
-              />
-              <Drawer.Content className='fixed bottom-[33px] left-[30px] right-[30px] z-[200] outline-none'>
-                <div className='flex flex-col'>
-                  {PAYMENT_METHODS.map((method) => (
-                    <div
-                      className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] border-[2px] border-b-[rgba(17,17,17,0.3)] border-l-[rgba(255,255,255,0.3)] border-r-[rgba(17,17,17,0.3)] border-t-[rgba(255,255,255,0.3)] bg-[#2D2B37] px-[12px] py-[8px] transition-all hover:bg-[#636363]'
-                      key={method.id}
-                      onClick={() => onPaymentMethodChange(method)}
-                    >
-                      <Image
-                        src={method.img}
-                        alt={method.name}
-                        className='w-[24px]'
-                      />
-                      <span className='text-white'>{method.name}</span>
-                      {method.id === paymentMethod.id && (
-                        <CheckedIcon className='ml-auto' />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </Drawer.Content>
-            </Drawer.Portal>
-          ) : (
-            <div ref={methodMenuRef} className='relative'>
-              <div
-                className={`absolute left-0 right-0 top-0 z-[4] flex flex-col overflow-hidden transition-[max-height] duration-300 ${methodMenuVisible ? 'max-h-[400px]' : 'max-h-0'}`}
-              >
-                <div className='flex flex-col bg-[#3B3C3E]'>
-                  {PAYMENT_METHODS.map((method) => (
-                    <div
-                      className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] border-[2px] border-b-[rgba(17,17,17,0.3)] border-l-[rgba(255,255,255,0.3)] border-r-[rgba(17,17,17,0.3)] border-t-[rgba(255,255,255,0.3)] bg-[#2D2B37] px-[12px] py-[8px] transition-all hover:bg-[#636363]'
-                      key={method.id}
-                      onClick={() => onPaymentMethodChange(method)}
-                    >
-                      <Image
-                        src={method.img}
-                        alt={method.name}
-                        className='w-[24px]'
-                      />
-                      <span className='text-white'>{method.name}</span>
-                      {method.id === paymentMethod.id && (
-                        <CheckedIcon className='ml-auto' />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </Drawer.Root>
+        )}
       </div>
 
+      {/* Payment Option / Token */}
       <div className='flex w-full flex-col'>
-        <p className='uppercase text-[#929292]'>{t('selectToken')}:</p>
-        <Drawer.Root
-          open={optionMenuVisible}
-          onClose={() => setOptionMenuVisible(false)}
+        <p className='uppercase text-white'>{t('selectToken')}:</p>
+        <div
+          ref={optionTriggerRef}
+          className={`z-[35] mt-[9px] flex h-[41px] cursor-pointer items-center gap-[12px] bg-black px-[12px] py-[8px] ${
+            optionMenuVisible ? 'bg-black' : ''
+          }`}
+          onClick={() =>
+            paymentMethod.id !== 'card' &&
+            paymentMethod.id !== 'tron' &&
+            setOptionMenuVisible(!optionMenuVisible)
+          }
         >
-          <div
-            className={`z-[35] mt-[9px] flex h-[41px] cursor-pointer items-center gap-[12px] border-[2px] border-b-[rgba(17,17,17,0.3)] border-l-[rgba(255,255,255,0.3)] border-r-[rgba(17,17,17,0.3)] border-t-[rgba(255,255,255,0.3)] bg-[#2D2B37] px-[12px] py-[8px] ${
-              optionMenuVisible && 'bg-[#303030]'
-            } `}
-            ref={optionTriggerRef}
-            onClick={() =>
-              paymentMethod.id !== 'card' &&
-              paymentMethod.id !== 'tron' &&
-              setOptionMenuVisible(!optionMenuVisible)
-            }
-          >
-            <Image
-              src={paymentOption?.icon || ''}
-              alt={paymentOption?.title || ''}
-              className='h-[24px] w-[24px]'
-            />
-            <p className='overflow-hidden text-ellipsis whitespace-nowrap text-[14px] text-white'>
-              {paymentOption.title}
-            </p>
-            <ChevronIcon
-              className={`ml-auto h-auto w-[12px] flex-shrink-0 transition-all ${
-                optionMenuVisible && 'rotate-[180deg]'
-              }`}
-            />
-          </div>
-          {isMd ? (
-            <Drawer.Portal>
-              <Drawer.Overlay
-                className='fixed inset-0 z-[100] bg-[#0F2430]/70'
-                onClick={() => setMethodMenuVisible(false)}
-              />
-              <Drawer.Content className='fixed bottom-[33px] left-[30px] right-[30px] z-[200] outline-none'>
-                <div className='flex flex-col'>
-                  {paymentMethod.options.map((option) => (
-                    <div
-                      className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] border-[2px] border-b-[rgba(17,17,17,0.3)] border-l-[rgba(255,255,255,0.3)] border-r-[rgba(17,17,17,0.3)] border-t-[rgba(255,255,255,0.3)] bg-[#2D2B37] px-[12px] py-[8px] transition-all hover:bg-[#636363]'
-                      key={option.id}
-                      onClick={() => onPaymentOptionChange(option)}
-                    >
-                      <Image
-                        src={option.icon}
-                        alt={option.title}
-                        className='w-[24px]'
-                      />
-                      <span className='text-white'>{option.title}</span>
-                      {option.id === paymentOption.id && (
-                        <CheckedIcon className='ml-auto' />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </Drawer.Content>
-            </Drawer.Portal>
-          ) : (
-            <div ref={optionMenuRef} className='relative'>
-              <div
-                className={`absolute left-0 right-0 top-0 z-[4] flex flex-col overflow-hidden transition-[max-height] duration-300 ${optionMenuVisible ? 'max-h-[40rem]' : 'max-h-0'}`}
-              >
-                <div className='flex flex-col bg-[#3B3C3E]'>
-                  {paymentMethod.options.map((option) => (
-                    <div
-                      className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] border-[2px] border-b-[rgba(17,17,17,0.3)] border-l-[rgba(255,255,255,0.3)] border-r-[rgba(17,17,17,0.3)] border-t-[rgba(255,255,255,0.3)] bg-[#2D2B37] px-[12px] py-[8px] transition-all hover:bg-[#636363]'
-                      key={option.id}
-                      onClick={() => onPaymentOptionChange(option)}
-                    >
-                      <Image
-                        src={option.icon}
-                        alt={option.title}
-                        className='w-[24px]'
-                      />
-                      <span className='text-white'>{option.title}</span>
+          <Image
+            src={paymentOption?.icon || ''}
+            alt={paymentOption?.title || ''}
+            className='h-[24px] w-[24px]'
+          />
+          <p className='overflow-hidden text-ellipsis whitespace-nowrap text-[14px] text-white'>
+            {paymentOption.title}
+          </p>
+          <motion.div animate={{ rotate: optionMenuVisible ? 180 : 0 }}>
+            <ChevronIcon className='ml-auto h-auto w-[12px] flex-shrink-0' />
+          </motion.div>
+        </div>
 
-                      {option.id === paymentOption.id && (
-                        <CheckedIcon className='ml-auto' />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </Drawer.Root>
+        {isMd ? (
+          // Mobile modal version
+          <AnimatePresence>
+            {optionMenuVisible && (
+              <>
+                <motion.div
+                  className='fixed inset-0 z-[100] bg-[#0F2430]'
+                  initial='hidden'
+                  animate='visible'
+                  exit='hidden'
+                  variants={modalOverlayVariants}
+                  onClick={() => setOptionMenuVisible(false)}
+                />
+                <motion.div
+                  className='fixed bottom-[33px] left-[30px] right-[30px] z-[200] outline-none'
+                  initial='hidden'
+                  animate='visible'
+                  exit='hidden'
+                  variants={modalContentVariants}
+                >
+                  <div className='flex flex-col'>
+                    {paymentMethod.options.map((option) => (
+                      <div
+                        key={option.id}
+                        className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] bg-black px-[12px] py-[8px] transition-all hover:bg-[#636363]'
+                        onClick={() => onPaymentOptionChange(option)}
+                      >
+                        <Image
+                          src={option.icon}
+                          alt={option.title}
+                          className='w-[24px]'
+                        />
+                        <span className='text-white'>{option.title}</span>
+                        {option.id === paymentOption.id && (
+                          <CheckedIcon className='ml-auto' />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+        ) : (
+          // Desktop dropdown version
+          <div ref={optionMenuRef} className='relative'>
+            <AnimatePresence>
+              {optionMenuVisible && (
+                <motion.div
+                  initial='closed'
+                  animate='open'
+                  exit='closed'
+                  variants={dropdownVariants}
+                  className='absolute left-0 right-0 top-0 z-[4] flex flex-col overflow-hidden'
+                >
+                  <div className='flex flex-col bg-black'>
+                    {paymentMethod.options.map((option) => (
+                      <div
+                        key={option.id}
+                        className='z-[3] flex h-[41px] cursor-pointer items-center gap-[12px] bg-black px-[12px] py-[8px] transition-all hover:bg-[#636363]'
+                        onClick={() => onPaymentOptionChange(option)}
+                      >
+                        <Image
+                          src={option.icon}
+                          alt={option.title}
+                          className='w-[24px]'
+                        />
+                        <span className='text-white'>{option.title}</span>
+                        {option.id === paymentOption.id && (
+                          <CheckedIcon className='ml-auto' />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
     </div>
   );

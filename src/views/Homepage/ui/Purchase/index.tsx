@@ -2,14 +2,17 @@ import styles from './styles.module.scss';
 import Image from 'next/image';
 import Arrow from './assets/arrow.svg?url';
 import Gradient from '@/shared/icons/Gradient.svg?url';
-import { BuyTokenForm } from './ui/Form';
 import { FoxImage } from './ui/FoxImage';
 import { SocialButton } from './ui/SocialButton';
 import TelegramIcon from '@/shared/icons/Telegram.svg?url';
 import DiscordIcon from '@/shared/icons/Discord.svg?url';
 import XIcon from '@/shared/icons/Twitter.svg?url';
+import PresaleForm from '@/widgets/PresaleForm';
+import { NextIntlClientProvider, useMessages } from 'next-intl';
+import Providers from '@/app/providers';
 
 const Purchase = () => {
+  const messages = useMessages();
   return (
     <div
       className={`outline-solid mx-auto flex w-[-webkit-fill-available] max-w-[1440px] outline outline-1 outline-[#202736] ${styles.section}`}
@@ -55,7 +58,11 @@ const Purchase = () => {
           </div>
         </div>
       </div>
-      <BuyTokenForm />
+      <Providers>
+        <NextIntlClientProvider messages={messages}>
+          <PresaleForm />
+        </NextIntlClientProvider>
+      </Providers>
     </div>
   );
 };

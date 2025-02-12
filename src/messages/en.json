@@ -1,0 +1,33 @@
+{
+  "form": {
+    "stage": "Stage",
+    "buy": "Buy",
+    "youPay": "You pay",
+    "youReceive": "You Receive",
+    "selectMethod": "Select Chain",
+    "selectToken": "Select Token",
+    "balance": "Balance",
+    "connect": "Connect Wallet",
+    "minPay": "The min amount is",
+    "noFunds": "You don't have enough available funds",
+    "pointRewards": "Points reward",
+    "buyToken": "Buy Token",
+    "totalRaised": "Total USD Raised",
+    "currentPrice": "Current Price",
+    "nextPrice": "Next Price",
+    "buyBefore": "Buy Token before price increases by",
+    "copy": "Copy referral link",
+    "copied": "Link copied",
+    "successPay": "Successful payment",
+    "viewTrans": "View transaction in explorer",
+    "back": "Back to home page",
+    "termsInfo": "By clicking the “ACCEPT” button I agree to the <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>",
+    "accept": "Accept",
+    "decline": "Decline",
+    "connectWalletToBalance": "Connect your wallet to see your balance",
+    "approving": "Approving...",
+    "buying": "Buying...",
+    "approve": "Approve",
+    "howToBuy": "How to buy?"
+  }
+}
