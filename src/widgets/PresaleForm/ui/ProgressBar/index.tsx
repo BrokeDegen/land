@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
-import pawImg from './assets/paw.png';
 import fomoImg from './assets/fomo.gif';
 import Image from 'next/image';
+import classNames from 'classnames';
 
 export const ProgressBar = ({
   percent,
@@ -24,16 +24,21 @@ export const ProgressBar = ({
       className={styles.bar}
     >
       <div
-        className={`absolute right-0 top-[50%] translate-x-[50%] ${small ? 'w-[22px] translate-y-[-50%]' : 'w-[31px] translate-y-[-35%]'}`}
+        className={classNames(
+          small ? 'w-[22px] translate-y-[-50%]' : 'w-[31px] translate-y-[-35%]',
+          'absolute right-0 top-[50%] translate-x-[50%]',
+        )}
       >
-        <div className='flex flex-shrink-0 flex-col items-center gap-[4px]'>
+        {percent >= 75 ? (
           <Image
-            src={percent >= 75 ? fomoImg : pawImg}
+            src={fomoImg}
             alt='pawImg'
-            className={`${small ? 'h-[24px] w-[22px]' : 'h-[33px] w-[31px]'} ${percent >= 75 ? 'md:mb-2' : null} flex-shrink-0`}
+            className={classNames(
+              small ? 'h-[24px] w-[22px]' : 'h-[33px] w-[31px]',
+              'flex-shrink-0 md:mb-2',
+            )}
           />
-          <p className={`text-[14px ${small ? 'hidden' : null}`}>{percent}%</p>
-        </div>
+        ) : null}
       </div>
     </div>
   </div>

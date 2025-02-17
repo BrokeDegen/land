@@ -1,12 +1,12 @@
 import { analytics } from '@/shared/analytics';
 import ModalWrapper from '@/shared/ui/ModalWrapper';
 import { StaticLoader } from '@/shared/ui/StaticLoader';
-import useWindowDimensions from '@/shared/utils/useWindowsDimensions';
 import { ApiResponse } from '@d4lb4eb/presale-ui-logic-sol/calculator';
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { SuccessModal } from '../SuccessModal';
+import { useWindowWidth } from '@/shared/hooks/useWindowWidth';
 
 interface MunzenWidgetModalProps {
   url?: string;
@@ -41,7 +41,7 @@ export const MunzenWidgetModal = ({
   const [loaded, setLoaded] = useState(false);
   const [height, setHeight] = useState(currency === 'USDT-MATIC' ? 609 : 780);
   const [completed, setCompleted] = useState(false);
-  const windowSizes = useWindowDimensions();
+  const windowSizes = useWindowWidth();
   const t = useTranslations();
 
   useEffect(() => {
@@ -113,16 +113,7 @@ export const MunzenWidgetModal = ({
 
   return (
     <>
-      <ModalWrapper
-        isOpen={open}
-        onClose={onCancel}
-        style={{
-          maxWidth: 500,
-          width: 464,
-          background: '#f7f7f7',
-          padding: '10px 5px',
-        }}
-      >
+      <ModalWrapper isOpen={open} onClose={onCancel}>
         <div
           style={{
             maxHeight: 'calc(100vh - 100px)',

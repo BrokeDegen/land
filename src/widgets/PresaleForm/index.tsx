@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { FormSkeleton } from './ui/FormSkeleton';
+import { FormSkeleton } from '../FormSkeleton';
 
 const PresaleForm = dynamic(() => import('./PresaleForm'), {
   ssr: false,
